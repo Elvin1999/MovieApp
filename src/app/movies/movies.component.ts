@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Movie } from '../models/movie';
 import { MovieRepository } from '../models/movie.repository';
 import { AlertifyService } from '../services/alertify.services';
@@ -11,37 +12,33 @@ declare let alertify: any;
   selector: 'app-movies',
   templateUrl: './movies.component.html',
   styleUrls: ['./movies.component.css'],
-  providers:[MovieService]
+  providers: [MovieService]
 })
 export class MoviesComponent implements OnInit {
   title: string = 'Movie List';
-  movies: Movie[]=[];
-  popularMovies: Movie[]=[];
+  movies: Movie[] = [];
+  popularMovies: Movie[] = [];
   //filteredMovies: Movie[];
   filterText: string = '';
+  error: any;
 
-  constructor(private alertifyService:AlertifyService,private movieService:MovieService) {
-   
+  constructor(private alertifyService: AlertifyService, private movieService: MovieService
+    , private activatedRoute: ActivatedRoute) {
+
   }
   ngOnInit() {
-
-    this.movieService.getMovies().subscribe(data=>{
-      this.movies=data;
-    })
-
-    // this.http.get<Movie[]>("http://localhost:3000/movies").subscribe(data=>{
-    //   this.movies=data;
-    //   console.log(this.movies);
-    // });
-
-    // this.http.get("https://jsonplaceholder.typicode.com/users").subscribe(data=>{
-    //   console.log(data);
-    // });
-
+    this.activatedRoute.params.subscribe(params => {
+      var value = params["categoryId"]
+      this.movieService.getMovies(value).subscribe(data => {
+        this.movies = data;
+      }, error => {
+        this.error = error;
+      });
+    });
   }
 
   OnInputChange() {
-  
+
   }
 
   addToList($event: any, item: Movie) {

@@ -13,9 +13,10 @@ import { MovieFilterPipe } from './pipes/movie-filter.pipe';
 import { AlertifyService } from './services/alertify.services';
 
 import {HttpClientModule} from '@angular/common/http';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
-  imports: [BrowserModule, FormsModule,HttpClientModule], // modules
+  imports: [BrowserModule, FormsModule,HttpClientModule, AppRoutingModule], // modules
   declarations: [
     AppComponent,
     NavbarComponent,

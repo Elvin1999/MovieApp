@@ -1,3 +1,7 @@
+<div class="alert alert-danger" *ngIf="error" >
+   {{error.message}} 
+  <!-- Some error occurred -->
+</div>
 <div *ngIf="movies.length > 0; else no_movies">
   <h1 class="text-primary">{{ title | uppercase }}</h1>
   <!-- <h1>{{ 100 | currency: '₼' }}</h1> -->
