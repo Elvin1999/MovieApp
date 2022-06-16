@@ -40,7 +40,6 @@
           <p class="card-text">
             {{ item.description }}
           </p>
-          <p class="card-text">{{ item.datePublished | date: 'short' }}</p>
           <button class="btn btn-sm btn-outline-primary">Details</button>
           <button
             (click)="addToList($event, item)"

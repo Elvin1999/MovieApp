@@ -1,7 +1,9 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Movie } from '../models/movie';
 import { MovieRepository } from '../models/movie.repository';
 import { AlertifyService } from '../services/alertify.services';
+import { MovieService } from '../services/movie.service';
 declare let alertify: any;
 //var alertify = require('../alertify.js');
 
@@ -9,31 +11,37 @@ declare let alertify: any;
   selector: 'app-movies',
   templateUrl: './movies.component.html',
   styleUrls: ['./movies.component.css'],
+  providers:[MovieService]
 })
 export class MoviesComponent implements OnInit {
   title: string = 'Movie List';
-  movies: Movie[];
-  popularMovies: Movie[];
-  // filteredMovies: Movie[];
-  movieRepository: MovieRepository;
+  movies: Movie[]=[];
+  popularMovies: Movie[]=[];
+  //filteredMovies: Movie[];
   filterText: string = '';
 
-  constructor(private alertifyService:AlertifyService) {
-    this.movieRepository = new MovieRepository();
-    this.movies = this.movieRepository.getMovies();
-    //this.movies.length=0;
-    this.popularMovies = this.movieRepository.getPopularMovies();
+  constructor(private alertifyService:AlertifyService,private movieService:MovieService) {
+   
   }
-  ngOnInit() {}
+  ngOnInit() {
+
+    this.movieService.getMovies().subscribe(data=>{
+      this.movies=data;
+    })
+
+    // this.http.get<Movie[]>("http://localhost:3000/movies").subscribe(data=>{
+    //   this.movies=data;
+    //   console.log(this.movies);
+    // });
+
+    // this.http.get("https://jsonplaceholder.typicode.com/users").subscribe(data=>{
+    //   console.log(data);
+    // });
+
+  }
 
   OnInputChange() {
-   // this.filteredMovies = this.filterText
-      // ? this.movies.filter(
-      //     (m: Movie) =>
-      //       m.title.toLocaleLowerCase().indexOf(this.filterText) !== -1 ||
-      //       m.description.toLocaleLowerCase().indexOf(this.filterText) !== -1
-      //   )
-      // : this.movies;
+  
   }
 
   addToList($event: any, item: Movie) {

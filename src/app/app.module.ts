@@ -12,8 +12,10 @@ import { FooterComponent } from './footer/footer.component';
 import { MovieFilterPipe } from './pipes/movie-filter.pipe';
 import { AlertifyService } from './services/alertify.services';
 
+import {HttpClientModule} from '@angular/common/http';
+
 @NgModule({
-  imports: [BrowserModule, FormsModule], // modules
+  imports: [BrowserModule, FormsModule,HttpClientModule], // modules
   declarations: [
     AppComponent,
     NavbarComponent,
