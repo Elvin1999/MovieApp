@@ -14,6 +14,7 @@ import { AlertifyService } from './services/alertify.services';
 
 import {HttpClientModule} from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
+import { MovieCreateComponent } from './movie-create/movie-create.component';
 
 @NgModule({
   imports: [BrowserModule, FormsModule,HttpClientModule, AppRoutingModule], // modules
@@ -26,6 +27,7 @@ import { AppRoutingModule } from './app-routing.module';
     MovieDetailsComponent,
     FooterComponent,
     MovieFilterPipe,
+    MovieCreateComponent,
   ], //component  providers - services
   providers:[AlertifyService],
   bootstrap: [AppComponent], //starter component

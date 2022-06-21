@@ -37,6 +37,8 @@ export class MoviesComponent implements OnInit {
     });
   }
 
+  
+
   OnInputChange() {
 
   }

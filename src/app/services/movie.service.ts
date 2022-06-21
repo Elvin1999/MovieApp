@@ -1,4 +1,4 @@
-import { HttpClient, HttpErrorResponse } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { catchError, Observable, tap, throwError } from "rxjs";
 import { Movie } from "../models/movie";
@@ -10,12 +10,36 @@ export class MovieService {
 
     }
 
-    getMovies(categoryId:number): Observable<Movie[]> {
-        let newUrl=this.url;
-        if(categoryId){
-            newUrl+='?categoryId='+categoryId;
+    getMovies(categoryId: number): Observable<Movie[]> {
+        let newUrl = this.url;
+        if (categoryId) {
+            newUrl += '?categoryId=' + categoryId;
         }
         return this.http.get<Movie[]>(newUrl)
+            .pipe(
+                tap(data => console.log(data)),
+                catchError(this.handleError)
+            );
+    }
+
+
+    createMovie(movie: any): Observable<Movie> {
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json',
+                'Authorization': 'Token'
+            })
+        };
+        return this.http.post<any>(this.url, movie, httpOptions)
+            .pipe(
+                tap(data => console.log(data)),
+                catchError(this.handleError)
+            );
+    }
+
+
+    getMovieById(movieId: Movie): Observable<Movie> {
+        return this.http.get<Movie>(this.url + "/" + movieId)
             .pipe(
                 tap(data => console.log(data)),
                 catchError(this.handleError)
