@@ -27,7 +27,7 @@ export class MovieService {
         const httpOptions = {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json',
-                'Authorization': 'Token'
+                'Authorization': 'Token' 
             })
         };
         return this.http.post<any>(this.url, movie, httpOptions)
