@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm, NgModel } from '@angular/forms';
+import { FormControl, FormGroup, NgForm, NgModel, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Category } from '../models/category';
 import { AlertifyService } from '../services/alertify.services';
@@ -14,7 +14,7 @@ import { MovieService } from '../services/movie.service';
 })
 export class MovieCreateComponent implements OnInit {
   categories: Category[];
-  model: any = {categoryId:-1};
+  model: any = { categoryId: -1 };
   constructor(private categoryService: CategoryService,
     private movieService: MovieService,
     private alertifyService: AlertifyService,
@@ -26,11 +26,31 @@ export class MovieCreateComponent implements OnInit {
     });
   }
 
+  movieForm = new FormGroup({
+    title: new FormControl("Movie New",[Validators.required,Validators.minLength(5)]),
+    description: new FormControl("",[Validators.required]),
+    imageUrl: new FormControl("",[Validators.required]),
+    categoryId: new FormControl("",[Validators.required])
+  });
+
+  ClearForm(){
+    this.movieForm.patchValue({
+      title:'',
+      description:'',
+      imageUrl:'',
+      categoryId:'-1'
+    });
+  }
+
   createMovie() {
 
-  //console.log(form);
-   // console.log(form.controls["categoryId"].value);
-   // console.log(form.value);
+
+
+
+
+    //console.log(form);
+    // console.log(form.controls["categoryId"].value);
+    // console.log(form.value);
     //console.log(this.model);
 
     // if(title.value==""){
@@ -55,12 +75,12 @@ export class MovieCreateComponent implements OnInit {
     // }
 
     const movie = {
-      title:this.model.title,
-      description:this.model.description,
-      imageUrl:this.model.imageUrl,
+      title:this.movieForm.value.title,
+      description:this.movieForm.value.description,
+      imageUrl:this.movieForm.value.imageUrl,
       isPopular:false,
       datePublished:new Date().getTime(),
-      categoryId:this.model.categoryId
+      categoryId:this.movieForm.value.categoryId
     };
 
       this.movieService.createMovie(movie)
