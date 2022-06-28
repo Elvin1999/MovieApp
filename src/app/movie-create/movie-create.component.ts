@@ -75,6 +75,7 @@ export class MovieCreateComponent implements OnInit {
     // }
 
     const movie = {
+      id:0,
       title:this.movieForm.value.title,
       description:this.movieForm.value.description,
       imageUrl:this.movieForm.value.imageUrl,
@@ -84,7 +85,10 @@ export class MovieCreateComponent implements OnInit {
     };
 
       this.movieService.createMovie(movie)
-      .subscribe(data=>this.router.navigate(['/movies',data.id]));
+      .subscribe(data=>
+        {
+          console.log(data);
+          this.router.navigate(['/movies'])});
 
 
   }

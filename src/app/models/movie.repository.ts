@@ -45,7 +45,7 @@ export class MovieRepository {
   getPopularMovies(): Movie[] {
     return this.movies.filter((i) => i.isPopular);
   }
-  getMovieById(id: number): Movie | undefined {
+  getMovieById(id: any): Movie | undefined {
     return this.movies.find((m) => m.id == id);
   }
 }

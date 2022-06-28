@@ -15,6 +15,7 @@ import { AlertifyService } from './services/alertify.services';
 import {HttpClientModule} from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { MovieCreateComponent } from './movie-create/movie-create.component';
+import { CategoryCreateComponent } from './category-create/category-create.component';
 
 @NgModule({
   imports: [BrowserModule, FormsModule,HttpClientModule, AppRoutingModule,ReactiveFormsModule], // modules
@@ -28,6 +29,7 @@ import { MovieCreateComponent } from './movie-create/movie-create.component';
     FooterComponent,
     MovieFilterPipe,
     MovieCreateComponent,
+    CategoryCreateComponent,
   ], //component  providers - services
   providers:[AlertifyService],
   bootstrap: [AppComponent], //starter component
