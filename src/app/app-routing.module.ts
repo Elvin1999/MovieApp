@@ -12,7 +12,7 @@ const routes:Routes=[
   {path:'movies/category/:categoryId',component:MoviesComponent},
   {path:'movies/create',component:MovieCreateComponent},
   {path:'movies/:movieId',component:MovieDetailsComponent},
-  {path:'categories/create',component:CategoryCreateComponent},
+  {path:'categories/create',component:CategoryCreateComponent,},
   
   {path:'',redirectTo:'movies',pathMatch:'full'},
 
