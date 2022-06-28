@@ -35,7 +35,7 @@ export class MovieService {
                 }),
                 tap(data => console.log(data)),
                 catchError(this.handleError),
-                delay(1000)
+                delay(500)
             );
     }
 
@@ -51,7 +51,7 @@ export class MovieService {
             .pipe(
                 tap(data => console.log(data)),
                 catchError(this.handleError),
-                delay(1000)
+                delay(500)
             );
     }
 

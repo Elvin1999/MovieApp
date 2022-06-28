@@ -22,22 +22,27 @@ export class MoviesComponent implements OnInit {
   filterText: string = '';
   error: any;
 
+  loading: boolean = false;
+
   constructor(private alertifyService: AlertifyService, private movieService: MovieService
     , private activatedRoute: ActivatedRoute) {
 
   }
   ngOnInit() {
     this.activatedRoute.params.subscribe(params => {
+      this.loading = true;
+
       var value = params["categoryId"]
       this.movieService.getMovies(value).subscribe(data => {
         this.movies = data;
+        this.loading = false;
       }, error => {
         this.error = error;
       });
     });
   }
 
-  
+
 
   OnInputChange() {
 
