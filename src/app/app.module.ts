@@ -12,14 +12,15 @@ import { FooterComponent } from './footer/footer.component';
 import { MovieFilterPipe } from './pipes/movie-filter.pipe';
 import { AlertifyService } from './services/alertify.services';
 
-import {HttpClientModule} from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { MovieCreateComponent } from './movie-create/movie-create.component';
 import { CategoryCreateComponent } from './category-create/category-create.component';
 import { AuthComponent } from './auth/auth.component';
+import { AuthInterceptor } from './services/auth.interceptor';
 
 @NgModule({
-  imports: [BrowserModule, FormsModule,HttpClientModule, AppRoutingModule,ReactiveFormsModule], // modules
+  imports: [BrowserModule, FormsModule, HttpClientModule, AppRoutingModule, ReactiveFormsModule], // modules
   declarations: [
     AppComponent,
     NavbarComponent,
@@ -33,7 +34,8 @@ import { AuthComponent } from './auth/auth.component';
     CategoryCreateComponent,
     AuthComponent,
   ], //component  providers - services
-  providers:[AlertifyService],
+  providers: [AlertifyService,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent], //starter component
 })
-export class AppModule {}
+export class AppModule { }

@@ -1,6 +1,9 @@
 import { formatNumber } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { AuthResponse } from '../models/AuthResponse';
 import { AuthService } from '../services/auth.service';
 
 @Component({
@@ -13,7 +16,7 @@ export class AuthComponent implements OnInit {
 
   isLoginMode: boolean = true;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -28,17 +31,21 @@ export class AuthComponent implements OnInit {
     const email = form.value.email;
     const password = form.value.password;
 
+    let authResponse: Observable<AuthResponse>;
+
     if (this.isLoginMode) {
-      console.log("login mode");
+      authResponse = this.authService.login(email, password);
     }
     else {
-
-      this.authService.signUp(email, password).subscribe(response => {
-        console.log(response);
-      }, err => {
-        console.log(err);
-      });
+      authResponse = this.authService.signUp(email, password);
     }
+    authResponse.subscribe(response => {
+
+      this.router.navigate(['/movies']);
+
+    }, err => {
+      console.log(err);
+    });
   }
 
 }
