@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { map, Observable } from "rxjs";
+import { map, Observable, tap } from "rxjs";
 import { Category } from "../models/category";
 
 
@@ -23,6 +23,26 @@ export class CategoryService {
                     return categories;
                 })
             );
+    }
+
+    hasValue = false;
+    hasCategory(category: string) {
+        let categories = this.getCategories().
+            subscribe(cc => {
+                cc.forEach(c => {
+                    for (let i = 0; i < cc.length; i++) {
+                        const element = cc[i];
+                        if (element.name == category) {
+                            this.hasValue = true;
+                            
+                        }
+                    }
+
+                });
+            }
+            )
+            
+        return this.hasValue;
     }
 
     createCategory(category: Category): Observable<Category> {

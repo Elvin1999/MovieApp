@@ -18,6 +18,7 @@ import { MovieCreateComponent } from './movie-create/movie-create.component';
 import { CategoryCreateComponent } from './category-create/category-create.component';
 import { AuthComponent } from './auth/auth.component';
 import { AuthInterceptor } from './services/auth.interceptor';
+import { MoviesHomeComponent } from './movies/movies-home/movies-home.component';
 
 @NgModule({
   imports: [BrowserModule, FormsModule, HttpClientModule, AppRoutingModule, ReactiveFormsModule], // modules
@@ -33,6 +34,7 @@ import { AuthInterceptor } from './services/auth.interceptor';
     MovieCreateComponent,
     CategoryCreateComponent,
     AuthComponent,
+    MoviesHomeComponent,
   ], //component  providers - services
   providers: [AlertifyService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
