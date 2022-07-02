@@ -16,7 +16,7 @@ const routes: Routes = [
   { path: 'categories/create', component: CategoryCreateComponent, },
   { path: 'auth', component: AuthComponent },
 
-  { path: '', redirectTo: 'auth', pathMatch: 'full' },
+  { path: '', redirectTo: 'movies', pathMatch: 'full' },
 
 ]
 @NgModule({

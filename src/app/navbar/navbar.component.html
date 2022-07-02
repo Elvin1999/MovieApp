@@ -19,8 +19,8 @@
       <li *ngIf="!isAuthenticated" class="nav-item">
         <a routerLink="/auth" class="nav-link">Login</a>
       </li>
-      <li class="nav-item">
-        <a routerLink="/logout" class="nav-link">Logout</a>
+      <li *ngIf="isAuthenticated" class="nav-item">
+        <a routerLink="/auth" (click)="OnLogOut()" class="nav-link">Logout</a>
       </li>
      
     </ul>
