@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Movie } from '../models/movie';
 import { MovieRepository } from '../models/movie.repository';
 import { AlertifyService } from '../services/alertify.services';
+import { AuthService } from '../services/auth.service';
 import { MovieService } from '../services/movie.service';
 declare let alertify: any;
 //var alertify = require('../alertify.js');
@@ -21,14 +22,19 @@ export class MoviesComponent implements OnInit {
   //filteredMovies: Movie[];
   filterText: string = '';
   error: any;
-
+  userId: string;
   loading: boolean = false;
 
   constructor(private alertifyService: AlertifyService, private movieService: MovieService
-    , private activatedRoute: ActivatedRoute) {
+    , private activatedRoute: ActivatedRoute, private authService: AuthService) {
 
   }
   ngOnInit() {
+
+    this.authService.user.subscribe(user => {
+      this.userId = user.id
+    });
+
     this.activatedRoute.params.subscribe(params => {
       this.loading = true;
 
@@ -53,12 +59,20 @@ export class MoviesComponent implements OnInit {
       $event.target.innerText = 'Remove List';
       $event.target.classList.remove('btn-primary');
       $event.target.classList.add('btn-danger');
-      this.alertifyService.success(item.title + ' added to list');
+
+
+      this.movieService
+        .addToMyList({ userId: this.userId, movieId: item.id })
+        .subscribe(() => this.alertifyService.success(item.title + ' added to list'));
+
     } else {
       $event.target.innerText = 'Add To List';
       $event.target.classList.remove('btn-danger');
       $event.target.classList.add('btn-primary');
       this.alertifyService.warning(item.title + ' removed from list');
     }
+
+
+
   }
 }
