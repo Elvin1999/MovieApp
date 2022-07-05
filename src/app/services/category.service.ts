@@ -33,8 +33,7 @@ export class CategoryService {
                     for (let i = 0; i < cc.length; i++) {
                         const element = cc[i];
                         if (element.name == category) {
-                            this.hasValue = true;
-                            
+                            this.hasValue = true;       
                         }
                     }
 

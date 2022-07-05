@@ -2,6 +2,9 @@
 
     <div class="col-md-5 mx-auto mt-5">
 
+
+        <app-alert  [message]="error" *ngIf="error" ></app-alert>
+
         <form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)">
             <div class="mb-3">
                 <label for="email" class="form-label">Email</label>

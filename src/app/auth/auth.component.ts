@@ -15,7 +15,7 @@ export class AuthComponent implements OnInit {
 
 
   isLoginMode: boolean = true;
-
+  error:any;
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
@@ -44,6 +44,7 @@ export class AuthComponent implements OnInit {
       this.router.navigate(['/movies']);
 
     }, err => {
+      this.error="Email or password is incorrect";
       console.log(err);
     });
   }
