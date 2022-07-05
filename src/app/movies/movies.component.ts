@@ -21,6 +21,7 @@ export class MoviesComponent implements OnInit {
   popularMovies: Movie[] = [];
   //filteredMovies: Movie[];
   filterText: string = '';
+  movieList: string[] = [];
   error: any;
   userId: string;
   loading: boolean = false;
@@ -29,23 +30,39 @@ export class MoviesComponent implements OnInit {
     , private activatedRoute: ActivatedRoute, private authService: AuthService) {
 
   }
+
+
+  getButtonState(item:Movie){
+    return this.movieList.findIndex(m=>m===item.id) > -1;
+  }
+
   ngOnInit() {
 
     this.authService.user.subscribe(user => {
       this.userId = user.id
-    });
 
-    this.activatedRoute.params.subscribe(params => {
-      this.loading = true;
+      this.activatedRoute.params.subscribe(params => {
+        this.loading = true;
 
-      var value = params["categoryId"]
-      this.movieService.getMovies(value).subscribe(data => {
-        this.movies = data;
-        this.loading = false;
-      }, error => {
-        this.error = error;
+        var value = params["categoryId"]
+        this.movieService.getMovies(value).subscribe(data => {
+          this.movies = data;
+
+
+          this.movieService.getList(this.userId).subscribe(data=>{
+            this.movieList=data;
+          });
+
+          this.loading = false;
+        }, error => {
+          this.error = error;
+        });
       });
+
+
     });
+
+
   }
 
 
@@ -69,7 +86,11 @@ export class MoviesComponent implements OnInit {
       $event.target.innerText = 'Add To List';
       $event.target.classList.remove('btn-danger');
       $event.target.classList.add('btn-primary');
-      this.alertifyService.warning(item.title + ' removed from list');
+
+      this.movieService
+        .removeFromList({ userId: this.userId, movieId: item.id })
+        .subscribe(() => this.alertifyService.warning(item.title + ' removed from list'));
+
     }
 
 

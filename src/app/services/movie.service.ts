@@ -56,11 +56,37 @@ export class MovieService {
             );
     }
 
-    addToMyList(item:MyList) : Observable<MyList>{
-        return this.http.post<MyList>(this.url_firebase+"/users/"+item.userId+"/list/"+item.movieId+".json",{
-            dateAdded:new Date().getTime() 
+    removeFromList(item: MyList): Observable<MyList> {
+        return this.http.delete<MyList>(this.url_firebase + "/users/" + item.userId + "/list/" + item.movieId + ".json")
+            .pipe(
+                tap(data => console.log(data)),
+                catchError(this.handleError)
+            )
+    }
+
+    getList(userId: string): Observable<string[]> {
+        return this.http.get<string[]>(this.url_firebase + "/users/" + userId + "/list.json")
+            .pipe(
+                map(response => {
+                    const movies: string[] = [];
+                    for (const key in response) {
+                        movies.push(key);
+                    }
+                    return movies;
+                }
+                ),
+                tap(data => console.log(data)),
+                catchError(this.handleError)
+
+            )
+    }
+
+
+    addToMyList(item: MyList): Observable<MyList> {
+        return this.http.post<MyList>(this.url_firebase + "/users/" + item.userId + "/list/" + item.movieId + ".json", {
+            dateAdded: new Date().getTime()
         }).pipe(
-            tap(data=>console.log(data)),
+            tap(data => console.log(data)),
             catchError(this.handleError)
         )
     }

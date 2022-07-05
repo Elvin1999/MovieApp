@@ -48,8 +48,13 @@
             {{ item.description }}
           </p>
           <a [routerLink]="['/movies',item.id]" class="btn btn-sm btn-outline-primary">Details</a>
-          <button (click)="addToList($event, item)" class="btn btn-sm btn-primary">
+
+          <button *ngIf="!getButtonState(item)" (click)="addToList($event, item)" class="btn btn-sm btn-primary">
             Add To List
+          </button>
+
+          <button *ngIf="getButtonState(item)" (click)="addToList($event, item)" class="btn btn-sm btn-danger">
+            Remove List
           </button>
         </div>
       </div>
