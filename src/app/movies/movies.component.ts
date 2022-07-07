@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Movie } from './movie';
+import { Movie } from './movie.model';
 import { MovieRepository } from './movie.repository';
 import { AlertifyService } from '../services/alertify.services';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../auth/auth.service';
 import { MovieService } from './movie.service';
 declare let alertify: any;
 //var alertify = require('../alertify.js');
@@ -32,33 +32,36 @@ export class MoviesComponent implements OnInit {
   }
 
 
-  getButtonState(item:Movie){
-    return this.movieList.findIndex(m=>m===item.id) > -1;
+  getButtonState(item: Movie) {
+    return this.movieList.findIndex(m => m === item.id) > -1;
   }
 
   ngOnInit() {
 
     this.authService.user.subscribe(user => {
-      this.userId = user.id
+      if (user) {
 
-      this.activatedRoute.params.subscribe(params => {
-        this.loading = true;
+        this.userId = user.id
 
-        var value = params["categoryId"]
-        this.movieService.getMovies(value).subscribe(data => {
-          this.movies = data;
+        this.activatedRoute.params.subscribe(params => {
+          this.loading = true;
+
+          var value = params["categoryId"]
+          this.movieService.getMovies(value).subscribe(data => {
+            this.movies = data;
 
 
-          this.movieService.getList(this.userId).subscribe(data=>{
-            this.movieList=data;
+            this.movieService.getList(this.userId).subscribe(data => {
+              this.movieList = data;
+            });
+
+            this.loading = false;
+          }, error => {
+            this.error = error;
           });
-
-          this.loading = false;
-        }, error => {
-          this.error = error;
         });
-      });
 
+      }
 
     });
 

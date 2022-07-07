@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -9,24 +8,28 @@ import { AlertifyService } from './services/alertify.services';
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
-import { AuthComponent } from './auth/auth.component';
-import { AuthInterceptor } from './services/auth.interceptor';
-import { AlertComponent } from './shared/alert/alert.component';
-import { LoadingComponent } from './shared/loading/loading.component';
+import { AuthInterceptor } from './auth/auth.interceptor';
 import { MoviesModule } from './movies/movies.module';
+import { AuthModule } from './auth/auth.module';
+import { CoreModule } from './core.module';
 
 @NgModule({
-  imports: [BrowserModule, FormsModule, HttpClientModule, AppRoutingModule, ReactiveFormsModule,MoviesModule], // modules
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    AppRoutingModule,
+    MoviesModule,
+    AuthModule,
+    CoreModule
+  ], // modules
   declarations: [
     AppComponent,
     NavbarComponent,
     FooterComponent,
-    AuthComponent,
-    AlertComponent,
-    LoadingComponent,
   ], //component  providers - services
-  providers: [AlertifyService,
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
+  providers: [
+
+  ],
   bootstrap: [AppComponent], //starter component
 })
 export class AppModule { }

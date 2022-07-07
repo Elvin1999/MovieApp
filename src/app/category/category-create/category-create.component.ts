@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Category } from '../category';
+import { Category } from '../category.model';
 import { AlertifyService } from '../../services/alertify.services';
 import { CategoryService } from '../category.service';
 
@@ -21,20 +21,20 @@ export class CategoryCreateComponent implements OnInit {
     setTimeout(() => {
       let hasValue = this.categoryService.hasCategory(name);
       console.log(hasValue);
-      if (hasValue) {
-        const category: Category = {
-          name: name
-        };
+      // if (hasValue) {
+      const category: Category = {
+        name: name
+      };
 
-        this.categoryService.createCategory(category)
-          .subscribe(data => {
-            console.log(data);
-            this.router.navigate(['/']);
-          })
-      }
-      else {
-        this.alertifyService.warning(name + " is already exist");
-      }
+      this.categoryService.createCategory(category)
+        .subscribe(data => {
+          console.log(data);
+          this.router.navigate(['/']);
+        })
+      // }
+      // else {
+      //   this.alertifyService.warning(name + " is already exist");
+      // }
 
     }, 500);
 

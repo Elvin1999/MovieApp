@@ -5,7 +5,6 @@ import { AuthComponent } from './auth/auth.component';
 const routes: Routes = [
  
 
-  { path: 'auth', component: AuthComponent },
   { path: '', redirectTo: 'movies', pathMatch: 'full' },
 
 ]

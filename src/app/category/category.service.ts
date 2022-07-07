@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { map, Observable, tap } from "rxjs";
-import { Category } from "./category";
+import { Category } from "./category.model";
 
 
 @Injectable()
@@ -36,7 +36,6 @@ export class CategoryService {
                             this.hasValue = true;       
                         }
                     }
-
                 });
             }
             )

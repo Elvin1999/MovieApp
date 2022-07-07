@@ -3,6 +3,7 @@ import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
 import { CategoriesModule } from "../category/categories.module";
+import { SharedModule } from "../shared/shared.module";
 import { MovieCreateComponent } from "./movie-create/movie-create.component";
 import { MovieDetailsComponent } from "./movie-details/movie-details.component";
 import { MovieFilterPipe } from "./movie-filter.pipe";
@@ -12,7 +13,7 @@ import { MoviesRoutingModule } from "./movies-routing.module";
 import { MoviesComponent } from "./movies.component";
 
 @NgModule({
-    declarations:[
+    declarations: [
         MoviesComponent,
         MovieComponent,
         MovieDetailsComponent,
@@ -20,15 +21,16 @@ import { MoviesComponent } from "./movies.component";
         MovieCreateComponent,
         MoviesHomeComponent,
     ],
-    imports:[
+    imports: [
         RouterModule,
         CommonModule,
         ReactiveFormsModule,
         FormsModule,
         MoviesRoutingModule,
-        CategoriesModule
+        CategoriesModule,
+        SharedModule
     ],
-    exports:[
+    exports: [
         MoviesComponent,
         MovieComponent,
         MovieDetailsComponent,
@@ -36,11 +38,11 @@ import { MoviesComponent } from "./movies.component";
         MovieCreateComponent,
         MoviesHomeComponent,
     ]
-   
+
 
 })
 
 
-export class MoviesModule{
+export class MoviesModule {
 
 }
