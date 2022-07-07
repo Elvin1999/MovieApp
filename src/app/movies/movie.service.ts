@@ -1,8 +1,8 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { catchError, delay, map, Observable, tap, throwError } from "rxjs";
-import { Movie } from "../models/movie";
-import { MyList } from "../models/mylist";
+import { Movie } from "./movie";
+import { MyList } from "./mylist";
 
 @Injectable()
 export class MovieService {

@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, NgForm, NgModel, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Category } from '../models/category';
-import { AlertifyService } from '../services/alertify.services';
-import { CategoryService } from '../services/category.service';
-import { MovieService } from '../services/movie.service';
+import { Category } from '../../models/category';
+import { AlertifyService } from '../../services/alertify.services';
+import { CategoryService } from '../../services/category.service';
+import { MovieService } from '../movie.service';
 
 @Component({
   selector: 'app-movie-create',

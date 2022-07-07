@@ -1,11 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Movie } from '../models/movie';
-import { MovieRepository } from '../models/movie.repository';
+import { Movie } from './movie';
+import { MovieRepository } from './movie.repository';
 import { AlertifyService } from '../services/alertify.services';
 import { AuthService } from '../services/auth.service';
-import { MovieService } from '../services/movie.service';
+import { MovieService } from './movie.service';
 declare let alertify: any;
 //var alertify = require('../alertify.js');
 
