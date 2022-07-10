@@ -1,4 +1,6 @@
 # MovieApp
+Site Link https://angular-movie-app-3eb99.web.app/movies
+Firebase Link https://console.firebase.google.com/u/0/project/angular-movie-app-3eb99/overview
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.7.
 
