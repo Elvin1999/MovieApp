@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subject, tap } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { AuthResponse } from './auth-response.model';
 import { User } from './user.model';
 
@@ -12,7 +13,7 @@ import { User } from './user.model';
 })
 export class AuthService {
 
-  api_key = "AIzaSyDnj67KVEoEiKnMP1N59vjgY6uZiZpL8VU";
+
   signUpUrl = "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=";
   signInUrl = "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=";
   user = new BehaviorSubject<User>(null);
@@ -23,7 +24,7 @@ export class AuthService {
 
 
   signUp(email: string, password: string) {
-    return this.http.post<AuthResponse>(this.signUpUrl + this.api_key, {
+    return this.http.post<AuthResponse>(this.signUpUrl + environment.api_key, {
       email: email,
       password: password,
       returnSecureToken: true
@@ -36,7 +37,7 @@ export class AuthService {
 
 
   login(email: string, password: string) {
-    return this.http.post<AuthResponse>(this.signInUrl + this.api_key, {
+    return this.http.post<AuthResponse>(this.signInUrl + environment.api_key, {
       email: email,
       password: password,
       returnSecureToken: true

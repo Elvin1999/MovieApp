@@ -1,15 +1,20 @@
 import { Component, OnInit, VERSION } from '@angular/core';
+import { environment } from 'src/environments/environment';
 import { AuthService } from './auth/auth.service';
 
 @Component({
   selector: 'my-app',
   templateUrl: './app.component.html',
-  styleUrls: [ './app.component.css' ]
+  styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit  {
+export class AppComponent implements OnInit {
   name = 'Angular ' + VERSION.major;
 
-  constructor(private authService:AuthService){}
+  constructor(private authService: AuthService) {
+    console.log(environment.production);
+    console.log(environment.value);
+
+  }
 
   ngOnInit(): void {
     this.authService.autoLogin();

@@ -18,8 +18,6 @@ import { CoreModule } from './core.module';
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    MoviesModule,
-    AuthModule,
     CoreModule
   ], // modules
   declarations: [
